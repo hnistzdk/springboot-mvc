@@ -5,7 +5,6 @@ import cn.zdk.webdemo.pojo.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.annotation.Resource;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,14 +17,14 @@ import java.util.Map;
 public class EmployeeMapper {
     private static Map<Integer, Employee> employees=null;
     @Autowired
-    private static DepartmentMapper departmentMapper;
+    private DepartmentMapper departmentMapper;
     static {
         employees=new HashMap<>();
-        employees.put(101,new Employee(1001,"AA","369365576@qq.com",1,departmentMapper.getDepartment(101)));
-        employees.put(102,new Employee(1001,"AA","369365576@qq.com",1,departmentMapper.getDepartment(102)));
-        employees.put(103,new Employee(1001,"AA","369365576@qq.com",1,departmentMapper.getDepartment(103)));
-        employees.put(104,new Employee(1001,"AA","369365576@qq.com",1,departmentMapper.getDepartment(104)));
-        employees.put(105,new Employee(1001,"AA","369365576@qq.com",1,departmentMapper.getDepartment(105)));
+        employees.put(101,new Employee(1001,"AA","369365576@qq.com",1,new Department(101,"教学部")));
+        employees.put(102,new Employee(1002,"AA","369365576@qq.com",1,new Department(102,"市场部")));
+        employees.put(103,new Employee(1003,"AA","369365576@qq.com",1,new Department(103,"后勤部")));
+        employees.put(104,new Employee(1004,"AA","369365576@qq.com",1,new Department(104,"教研部")));
+        employees.put(105,new Employee(1005,"AA","369365576@qq.com",1,new Department(105,"运营部")));
     }
 
     public Collection<Employee> getDepartments(){
@@ -34,5 +33,27 @@ public class EmployeeMapper {
 
     public Employee getDepartment(Integer id){
         return employees.get(id);
+    }
+
+    private static Integer initId=1006;
+
+    public void save(Employee employee){
+        if(employee.getId()==null){
+            employee.setId(initId++);
+        }
+        employee.setDepartment(departmentMapper.getDepartment(employee.getDepartment().getId()));
+        employees.put(employee.getId(), employee);
+    }
+
+    public Collection<Employee> getAll(){
+        return employees.values();
+    }
+
+    public Employee getEmployeeById(Integer id){
+        return employees.get(id);
+    }
+
+    public void deleteEmployeeById(Integer id){
+        employees.remove(id);
     }
 }
