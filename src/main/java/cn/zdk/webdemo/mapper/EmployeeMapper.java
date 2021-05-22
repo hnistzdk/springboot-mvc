@@ -20,11 +20,11 @@ public class EmployeeMapper {
     private DepartmentMapper departmentMapper;
     static {
         employees=new HashMap<>();
-        employees.put(101,new Employee(1001,"AA","369365576@qq.com",1,new Department(101,"教学部")));
-        employees.put(102,new Employee(1002,"AA","369365576@qq.com",1,new Department(102,"市场部")));
-        employees.put(103,new Employee(1003,"AA","369365576@qq.com",1,new Department(103,"后勤部")));
-        employees.put(104,new Employee(1004,"AA","369365576@qq.com",1,new Department(104,"教研部")));
-        employees.put(105,new Employee(1005,"AA","369365576@qq.com",1,new Department(105,"运营部")));
+        employees.put(1001,new Employee(1001,"AA","369365576@qq.com",0,new Department(101,"教学部")));
+        employees.put(1002,new Employee(1002,"BB","369365576@qq.com",1,new Department(102,"市场部")));
+        employees.put(1003,new Employee(1003,"CC","369365576@qq.com",0,new Department(103,"后勤部")));
+        employees.put(1004,new Employee(1004,"DD","369365576@qq.com",1,new Department(104,"教研部")));
+        employees.put(1005,new Employee(1005,"EE","369365576@qq.com",1,new Department(105,"运营部")));
     }
 
     public Collection<Employee> getDepartments(){
